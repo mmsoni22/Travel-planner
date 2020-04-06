@@ -14,3 +14,11 @@ const port = 8080;
 app.listen(port , ()=> {
     console.log(`Travel app is running on port ${port}`);
 })
+
+app.get('/', function (req, res) {
+    res.sendFile('/client/views/index.html', { root: __dirname + '/..' })
+})
+
+app.get('/test', function (req, res) {
+    res.send(mockAPIResponse)
+})
