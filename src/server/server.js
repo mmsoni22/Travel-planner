@@ -8,7 +8,7 @@ const app = express();
 app.use(cors());
 app.use(bodyParser.urlencoded({urlencoded : false}));
 
-app.use(express.static("src/client"));
+app.use(express.static("dist"));
 
 const port = 8080;
 
