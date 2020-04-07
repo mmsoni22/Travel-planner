@@ -17,7 +17,7 @@ app.listen(port , ()=> {
 })
 
 app.get('/', function (req, res) {
-    res.sendFile('/client/views/index.html', { root: __dirname + '/..' })
+    res.sendFile("dist/index.html");
 })
 
 app.get('/test', function (req, res) {
