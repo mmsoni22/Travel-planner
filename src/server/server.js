@@ -1,7 +1,14 @@
 const path = require('path');
 const express = require("express");
+const mockAPIResponse = require('./mockAPI.js')
 const cors = require("cors");
 const bodyParser = require("body-parser");
+
+var json = {
+    'title': 'test json response',
+    'message': 'this is a message',
+    'time': 'now'
+}
 
 const app = express();
 
