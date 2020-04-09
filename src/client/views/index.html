@@ -3,37 +3,22 @@
     <head>
         <meta charset="utf-8">
         <title>Test</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1">
     
     </head>
 
-    <body>
-
-        <header>
-            <div class="">
-                Logo
-            </div>
-            <div class="">
-                navigation
-            </div>
+    <body><header>
+        <h1 id="appName">Trip Organizer</h1>
         </header>
-
-        <main>
-            <section>
-                <form class="" onsubmit="return Client.handleSubmit(event)" autocomplete="off">
-                    <input id="name" type="text" name="input" value="" onblur="onBlur()" placeholder="Name">
-                    <input type="submit" name="" value="submit" onclick="return Client.handleSubmit(event)"  onsubmit="return Client.handleSubmit( event )">
-                </form>
-            <section>
-
-            <section>
-                <strong>Form Results:</strong>
-                <div id="results"></div>
-            </section>
-        </main>
-
-        <footer>
-            <p>This is a footer</p>
-        </footer>
-
+        <main id="trips"></main>
+        <form id="trip-form">
+            <div id="location-input-container">
+                <label>Destination: </label><input type="text" id= "location-input" name = "locationInput" placeholder="location">
+            </div>
+            <div id="date-input-container">
+                <label>Departure Date : </label><input type="text" id = "date-input" name = "dateInput" placeholder="mm/dd/yyyy" maxlength="10">
+            </div>
+            <button id = "add-tripButton square-button">Add Trip</button>
+        </form>
     </body>
 </html>
