@@ -3,6 +3,8 @@ const express = require("express");
 const mockAPIResponse = require('./mockAPI.js')
 const cors = require("cors");
 const bodyParser = require("body-parser");
+const dotenv = require('dotenv');
+dotenv.config();
 
 var json = {
     'title': 'test json response',
