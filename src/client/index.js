@@ -1,4 +1,4 @@
-
+import {validDestination , validDate} from "./js/inputValidation";
 alert("This is an alert!");
 
 import './styles/reset.scss';
