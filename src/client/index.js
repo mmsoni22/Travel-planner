@@ -1,4 +1,5 @@
 import {validDestination , validDate} from "./js/inputValidation";
+import { addTrip } from "./js/travel-app"
 alert("This is an alert!");
 
 import './styles/reset.scss';
