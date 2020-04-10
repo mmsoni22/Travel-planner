@@ -7,3 +7,9 @@ import './styles/base.scss';
 import './styles/header.scss';
 import './styles/form.scss';
 
+//export javaScript funtion
+export {
+    validDestination,
+    validDate,
+    addTrip
+}
