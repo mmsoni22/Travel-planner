@@ -11,7 +11,18 @@ var json = {
     'message': 'this is a message',
     'time': 'now'
 }
+// Import API libraries
+const Geonames = require( 'geonames.js' );
+const DarkSky = require( 'dark-sky' );
 
+// Initialize API libraries
+const geonames = new Geonames( {
+	username: process.env.GEONAMES_API_USERNAME,
+	lang: 'en',
+	encoding: 'JSON'
+});
+
+const darksky = new DarkSky( process.env.DARK_SKY_API_KEY );
 const app = express();
 
 app.use(cors());
