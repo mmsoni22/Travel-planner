@@ -64,7 +64,22 @@ const insertTrip = ( tripInfo ) => {
 	latestEntry.querySelector( '.trip-add-notes-button' ).addEventListener( 'click', () => { TravelApp.addNotes( entryIndex ); } );
 	latestEntry.querySelector( '.save-trip-button' ).addEventListener( 'click', () => { TravelApp.updateTrip( entryIndex ); } );
 	latestEntry.querySelector( '.remove-trip-button' ).addEventListener( 'click', () => { TravelApp.removeTrip( entryIndex ); } );
-        
+
+	
+const getGeoCoords = async() => {
+
+
+}
+
+const getForecast = async() ={
+
+}
+
+const getImage = async () => {
+	
+}
+
+
 const addTrip = (event) => {
     event.preventDefault();
     const destInput = event.target[0].value; // Destination input.
