@@ -5,6 +5,7 @@ const cors = require("cors");
 const bodyParser = require("body-parser");
 const dotenv = require('dotenv');
 dotenv.config();
+const fetch = require( 'node-fetch' );
 
 var json = {
     'title': 'test json response',
@@ -14,6 +15,7 @@ var json = {
 // Import API libraries
 const Geonames = require( 'geonames.js' );
 const DarkSky = require( 'dark-sky' );
+
 
 // Initialize API libraries
 const geonames = new Geonames( {
