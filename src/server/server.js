@@ -40,6 +40,35 @@ app.get('/', function (req, res) {
     res.sendFile("dist/index.html");
 })
 
+// Setup route for getting geographic coordinates.
+app.post( '/geo-coords', ( request, response ) => {
+
+	geonames.search( { 'q': request.body.destination } )
+	.then( geonamesResponse => {
+
+		tripData = {
+			'country': geonamesResponse.geonames[0].countryName,
+			'longitude': geonamesResponse.geonames[0].lng,
+			'latitude': geonamesResponse.geonames[0].lat,
+			'error': ""
+		}
+
+		response.send( tripData );
+	})
+	.catch(
+		( error ) => {
+			
+			tripData = {
+				'country': '',
+				'longitude': '',
+				'latitude': '',
+				'error': error
+			}
+			response.send( tripData );
+		}
+	);
+
+});
 app.get('/test', function (req, res) {
     res.send(mockAPIResponse)
 })
