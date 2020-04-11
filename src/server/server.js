@@ -71,6 +71,36 @@ app.post( '/geo-coords', ( request, response ) => {
 	);
 
 });
+
+// Setup route for getting forcast information.
+app.post( '/forecast', ( request, response ) => {
+
+	// Format date.
+	const dateArray = request.body.date.split( '/' );
+	const date = `${dateArray[2]}-${dateArray[0]}-${dateArray[1]}`; // yyyy-mm-dd
+
+	darksky
+		.options({
+			latitude: request.body.latitude,
+			longitude: request.body.longitude,
+			time: date,
+			language: 'en',
+			exclude: ['minutely', 'daily']
+		})
+		.get()
+		.then( ( res ) => {
+
+			response.send( res );
+
+		})
+		.catch( ( error ) => {
+
+			response.send( error );
+
+		});
+
+});
+
 app.get('/test', function (req, res) {
     res.send(mockAPIResponse)
 })
