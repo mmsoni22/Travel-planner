@@ -64,7 +64,7 @@ const insertTrip = ( tripInfo ) => {
 	latestEntry.querySelector( '.trip-add-notes-button' ).addEventListener( 'click', () => { TravelApp.addNotes( entryIndex ); } );
 	latestEntry.querySelector( '.save-trip-button' ).addEventListener( 'click', () => { TravelApp.updateTrip( entryIndex ); } );
 	latestEntry.querySelector( '.remove-trip-button' ).addEventListener( 'click', () => { TravelApp.removeTrip( entryIndex ); } );
-
+}
 	
 const getGeoCoords = async() => {
 
@@ -76,7 +76,7 @@ const getForecast = async() ={
 }
 
 const getImage = async () => {
-	
+
 }
 
 
@@ -90,6 +90,38 @@ const addTrip = (event) => {
 		return
 
 	};
+	
+	const tripInfo = {
+		'destination': destInput,
+		'date': dateInput,
+		'country': '',
+		'latitude': '',
+		'longitude': '',
+		'forecast': '',
+		'notes': ''
+	}
+
+	getGeoCoords( tripInfo ) // Get longitude, latitude, and country data.
+		.then( ( tripInfo ) => {
+
+			return getForecast( tripInfo ); // Get forecast data.
+
+		}).then( ( tripInfo ) => {
+
+			return getImage( tripInfo ); // Get image data.
+
+		})
+		.then( ( tripInfo ) => {
+
+			insertTrip( tripInfo ); // Add trip to app display.
+			saveTrip( tripInfo ); // Add trip to localStorage.
+
+		})
+		.catch( ( error ) => {
+
+			console.log( error );
+
+		});
 }
 
 export {
