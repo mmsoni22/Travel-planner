@@ -1,4 +1,18 @@
 import { validDestination , validDate} from "./inputValidationinputValidation";
+const calcNumDays = ( tripInfo ) => { // Calculate number of days before trip.
+
+	const dateArray = tripInfo.date.split( '/' );
+	let tripDate = new Date( parseInt( dateArray[2] ), parseInt( dateArray[0] ) - 1, parseInt( dateArray[1] ) ); // Year, Month Index, Day. Month index = month - 1.
+	let currentDate = new Date();
+	const dateDiff = tripDate.getTime() - currentDate.getTime();
+	const numSeconds = Math.floor( dateDiff / 1000 );
+	const numMinutes = Math.floor( numSeconds / 60 );
+	const numHours = Math.floor( numMinutes / 60 );
+	const numDays = Math.floor( numHours / 24 );
+
+	return numDays;
+
+};
 const insertTrip = ( tripInfo ) => {
 
 	const numDays = calcNumDays( tripInfo );
@@ -64,6 +78,9 @@ const insertTrip = ( tripInfo ) => {
 	latestEntry.querySelector( '.trip-add-notes-button' ).addEventListener( 'click', () => { TravelApp.addNotes( entryIndex ); } );
 	latestEntry.querySelector( '.save-trip-button' ).addEventListener( 'click', () => { TravelApp.updateTrip( entryIndex ); } );
 	latestEntry.querySelector( '.remove-trip-button' ).addEventListener( 'click', () => { TravelApp.removeTrip( entryIndex ); } );
+	latestEntry.querySelector( '.trip-image-container' ).style.backgroundImage = `url(${tripInfo.image})`;
+
+	// Set image url.
 	latestEntry.querySelector( '.trip-image-container' ).style.backgroundImage = `url(${tripInfo.image})`;
 
 	// Show notes if they exist.
@@ -210,12 +227,111 @@ const addNotes = ( index ) => {
 	document.querySelectorAll( '.trip-notes-container' )[index].style.display = 'block';
 
 };
+const saveTrip = ( tripInfo ) => {
 
+	try{
+
+		if( localStorage.getItem( 'trips' ) == null ) { // Add 'trips' entry in localStorage if it doesn't exist.
+
+			let tripsArray = [tripInfo];
+			localStorage.setItem( 'trips', JSON.stringify( tripsArray ) );
+
+		}else{ // Update the 'trips' entry in localStorage.
+			
+			let tripsArray = JSON.parse( localStorage.getItem( 'trips' ) );
+			tripsArray.push( tripInfo );
+			localStorage.setItem( 'trips', JSON.stringify( tripsArray ) );
+
+		}
+
+	}catch( error ){
+
+		alert( 'Error: Your local storage is disabled and will prevent this app from functioning properly.' );
+
+	}
+
+};
+const updateTrip = ( index ) => {
+
+	try{
+
+		if( localStorage.getItem( 'trips' ) == null ){ // Skip if 'trips' doesn't exist in localStorage.
+
+			alert( 'Trip could not be saved.' );
+
+		}else{ // Update the 'trips' entry in localStorage.
+			
+			let tripsArray = JSON.parse( localStorage.getItem( 'trips' ) );
+			tripsArray[index].notes = document.querySelectorAll( '.notes' )[index].value;
+			localStorage.setItem( 'trips', JSON.stringify( tripsArray ) );
+			alert( 'Trip saved' );
+
+		}
+
+	}catch( error ){
+
+		console.log( error );
+		alert( 'Error: Your local storage is disabled.' );
+
+	}
+
+};
+const loadTrips = () => {
+
+	try{
+
+		if( localStorage.getItem( 'trips' ) != null ) {
+
+			let tripsArray = JSON.parse( localStorage.getItem( 'trips' ) );
+
+			for( let trip of tripsArray ) {
+
+				insertTrip( trip );
+
+			}
+
+		}
+
+	}catch( error ){ console.log( error ) }
+
+};
+const removeTrip = ( index ) => {
+
+	// Remove trip
+	try{
+
+		if( localStorage.getItem( 'trips' ) != null ) {
+
+			let tripsArray = JSON.parse( localStorage.getItem( 'trips' ) );
+			tripsArray.splice( index, 1 );
+			localStorage.setItem( 'trips', JSON.stringify( tripsArray ) );
+
+		}
+
+	}catch( error ){}
+
+	document.querySelector( '#trips').innerHTML = "";
+	loadTrips(); // Reload all remaining trips to update indexing.
+
+};
+const init = () => {
+
+	document.querySelector( '#trip-form' ).addEventListener( 'submit', addTrip );
+
+	loadTrips(); // Load all trips that are saved in localStorage.
+
+};
 export {
 	addTrip,
 	getGeoCoords,
 	getForecast,
 	getImage,
-	insertTrip
-
+	insertTrip,
+	calcNumDays,
+	addNotes,
+	saveTrip,
+	updateTrip,
+	loadTrips,
+	removeTrip,
+	init
 }
