@@ -1,4 +1,5 @@
-import { validDestination , validDate} from "./inputValidationinputValidation";
+import { validDestination , validDate} from "./inputValidation.js"
+
 const calcNumDays = ( tripInfo ) => { // Calculate number of days before trip.
 
 	const dateArray = tripInfo.date.split( '/' );

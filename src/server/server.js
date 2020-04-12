@@ -31,6 +31,7 @@ app.use(cors());
 app.use(bodyParser.urlencoded({urlencoded : false}));
 
 app.use(express.static("dist"));
+let tripData = {};
 
 const port = 3000;
 
