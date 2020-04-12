@@ -204,7 +204,12 @@ const addTrip = (event) => {
 			console.log( error );
 
 		});
-}
+};
+const addNotes = ( index ) => {
+
+	document.querySelectorAll( '.trip-notes-container' )[index].style.display = 'block';
+
+};
 
 export {
 	addTrip,
