@@ -64,19 +64,101 @@ const insertTrip = ( tripInfo ) => {
 	latestEntry.querySelector( '.trip-add-notes-button' ).addEventListener( 'click', () => { TravelApp.addNotes( entryIndex ); } );
 	latestEntry.querySelector( '.save-trip-button' ).addEventListener( 'click', () => { TravelApp.updateTrip( entryIndex ); } );
 	latestEntry.querySelector( '.remove-trip-button' ).addEventListener( 'click', () => { TravelApp.removeTrip( entryIndex ); } );
+	latestEntry.querySelector( '.trip-image-container' ).style.backgroundImage = `url(${tripInfo.image})`;
+
+	// Show notes if they exist.
+	if( tripInfo.notes != '' ) {
+
+		document.querySelectorAll( '.notes' )[entryIndex].value = tripInfo.notes;
+		addNotes( entryIndex );
+
 }
-	
+};
 const getGeoCoords = async() => {
+	const response = await fetch( '/geo-coords', {
+		method: 'POST',
+		credentials: 'same-origin',
+		headers: {
+			'Content-Type': 'application/json'
+		},
+		body: JSON.stringify( {
+			'destination': tripInfo.destination,
+			'date': tripInfo.date
+		})
+	});
 
+try{
+
+	const data = await response.json();
+	tripInfo.latitude = data.latitude;
+	tripInfo.longitude = data.longitude;
+	tripInfo.country = data.country;
+
+	return tripInfo;
+
+}catch( error ){
+
+	console.log( error );
 
 }
 
-const getForecast = async() ={
+};
 
+const getForecast = async() =>{
+	const response = await fetch( '/forecast', {
+		method: 'POST',
+		credentials: 'same-origin',
+		headers: {
+			'Content-Type': 'application/json'
+		},
+		body: JSON.stringify( {
+			'latitude': tripInfo.latitude,
+			'longitude': tripInfo.longitude,
+			'date': tripInfo.date
+		})
+	});
+
+try{
+
+	const data = await response.json();
+
+	tripInfo.forecast = data.hourly.summary;
+
+	return tripInfo;
+
+}catch( error ){
+
+	console.log( error );
+	
 }
+};
 
 const getImage = async () => {
+	const response = await fetch( '/image', {
+		method: 'POST',
+		credentials: 'same-origin',
+		headers: {
+			'Content-Type': 'application/json'
+		},
+		body: JSON.stringify( {
+			'destination': tripInfo.destination,
+			'country': tripInfo.country
+		})
+	});
 
+try{
+
+	const data = await response.json();
+
+	tripInfo.image = data.hits[0].webformatURL;
+
+	return tripInfo;
+
+}catch( error ){
+
+	console.log( error );
+
+}
 }
 
 
@@ -125,5 +207,10 @@ const addTrip = (event) => {
 }
 
 export {
-    addTrip
+	addTrip,
+	getGeoCoords,
+	getForecast,
+	getImage,
+	insertTrip
+
 }
