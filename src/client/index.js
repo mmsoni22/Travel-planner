@@ -1,3 +1,4 @@
+import '@babel/polyfill';
 import {validDestination , validDate} from "./js/inputValidation";
 import { calcNumDays, insertTrip, getGeoCoords, getForecast, getImage, addTrip, addNotes, saveTrip, updateTrip, loadTrips, removeTrip, init } from './js/travel-app';
 
