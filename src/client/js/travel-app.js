@@ -92,7 +92,7 @@ const insertTrip = ( tripInfo ) => {
 
 }
 };
-const getGeoCoords = async() => {
+const getGeoCoords = async(tripInfo) => {
 	const response = await fetch( '/geo-coords', {
 		method: 'POST',
 		credentials: 'same-origin',
@@ -122,7 +122,7 @@ try{
 
 };
 
-const getForecast = async() =>{
+const getForecast = async(tripInfo) =>{
 	const response = await fetch( '/forecast', {
 		method: 'POST',
 		credentials: 'same-origin',

@@ -1,0 +1,97 @@
+$info-padding: 18px;
+$section-padding: 24px;
+$small-font: 0.8em;
+
+.trip-entry{
+	display: flex;
+	flex-direction: row;
+	flex-wrap: wrap;
+	width: 100%;
+	min-height: 200px;
+	height: auto;
+	background-color: #f9fafc;
+	border: 1px dashed #bbb;
+	border-bottom: none;
+}
+
+.trip-left-content{
+	width: 50%;
+	padding: $section-padding;
+}
+
+.trip-image-container{
+	width: 100%;
+	padding-top: 56.25%; // Forces 16:9 aspect ratio
+	background-image: url( "https://images.pexels.com/photos/731217/pexels-photo-731217.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500" );
+	background-position: center;
+	background-repeat: no-repeat;
+	background-size: cover;
+}
+
+.trip-right-content{
+	width: 50%;
+	padding: $section-padding;
+}
+
+.trip-flight-info{
+	padding-top: $info-padding;
+	padding-right: $info-padding;
+}
+
+.flight-info-label{
+	position: relative;
+	float: left;
+	width: 50%;
+	font-weight: bold;
+}
+
+.flight-info{
+	position: relative;
+	float: right;
+	width: 50%;
+	font-size: $small-font;
+	text-align: right;
+}
+
+.trip-add-remove{
+	padding-top: $info-padding;
+}
+
+.trip-countdown{
+	padding-top: $info-padding;
+}
+
+.trip-countdown-num{
+	text-decoration: underline;
+}
+
+.trip-weather{
+	padding-top: $info-padding;
+}
+
+.trip-weather-details{
+	font-size: $small-font;
+}
+
+.trip-bottom-container{
+	width: 50%;
+	padding: $section-padding;
+}
+
+.trip-notes-container{
+	display: none;
+	width: 100%;
+	padding-top: $info-padding;
+}
+
+@media( max-width: 890px ){
+	body{
+		width: auto;
+	}
+	.trip-entry{
+		flex-direction: column;
+	}
+	.trip-left-content, .trip-right-content, .trip-bottom-container{
+		width: 100%;
+	}
+}

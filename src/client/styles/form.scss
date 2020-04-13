@@ -1,12 +1,50 @@
-form {
-    border: 1px solid #545454;
-    border-radius: 3px;
-    padding: 40px;
+$hover-background-color: #f9fff6;
+
+button{
+	cursor: pointer;
+	color: #646464;
+	background-color: #f0f0f0;
+	border: 1px solid #bbb;
+	padding: 7px;
+	&:hover{
+		color: inherit;
+		background-color: #fff;
+	}
 }
 
-input {
-    padding: 5px 20px;
-    width: 100%;
-    line-height: 16px;
-    margin: 10px 0;
+.rounded-button{
+	border-radius: 16px;
+	padding-left: 16px;
+	padding-right: 16px;
+}
+
+textarea{
+	padding: 10px;
+	margin-top: 18px;
+	width: 100%;
+	border: 1px solid #bbb;
+	&:hover{
+		background-color: $hover-background-color;
+	}
+}
+
+#trip-form{
+	padding: 24px;
+	text-align: center;
+	background-color: #f2f2f2;
+	border: 1px dashed #bbb;
+	input{
+		padding: 7px;
+		border: 1px solid #bbb;
+	}
+	input:hover{
+		background-color: $hover-background-color;
+	}
+	button{
+		margin-top: 18px;
+	}
+}
+
+#date-input-container{
+	margin-top: 9px;
 }
