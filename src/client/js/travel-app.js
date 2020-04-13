@@ -151,7 +151,7 @@ try{
 }
 };
 
-const getImage = async () => {
+const getImage = async (tripInfo) => {
 	const response = await fetch( '/image', {
 		method: 'POST',
 		credentials: 'same-origin',
