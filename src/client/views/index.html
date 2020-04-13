@@ -20,5 +20,21 @@
             </div>
             <button id = "add-tripButton square-button">Add Trip</button>
         </form>
+        
+		<script>
+			// Make sure service workers are supported in user's browser
+			if( 'serviceWorker' in navigator ) {
+
+				// Register the service worker after the page loads
+				window.addEventListener( 'load', () => {
+					navigator.serviceWorker.register( '/service-worker.js' );
+				});
+
+			}else{
+
+				console.log( "Service Workers are not supported in this browser." );
+
+			}
+		</script>
     </body>
 </html>
